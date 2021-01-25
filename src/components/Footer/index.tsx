@@ -28,7 +28,11 @@ const FooterWrapper = styled.footer`
   }
 `;
 
+<<<<<<< HEAD
 export default function Footer() {
+=======
+export default function Footer(props: any) {
+>>>>>>> 62decccd7e312363bb0acbfaf1eaeeb55b257e77
   return (
     <FooterWrapper>
       <a href="https://www.alura.com.br/">
