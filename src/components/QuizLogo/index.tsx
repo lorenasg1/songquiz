@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import React, { HTMLAttributes, SVGAttributes } from 'react';
+import React, { SVGAttributes } from 'react';
 import PropTypes from 'prop-types';
 
 function Logo({ className }: SVGAttributes<SVGElement>) {
