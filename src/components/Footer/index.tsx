@@ -1,5 +1,4 @@
-import { ReactChildren, ReactNodeArray } from 'react';
-import styled, { StyledProps } from 'styled-components';
+import styled from 'styled-components';
 
 const FooterWrapper = styled.footer`
   background-color: #000007;
@@ -29,7 +28,7 @@ const FooterWrapper = styled.footer`
   }
 `;
 
-export default function Footer(props: ReactNodeArray) {
+export default function Footer(props: any) {
   return (
     <FooterWrapper {...props}>
       <a href="https://www.alura.com.br/">

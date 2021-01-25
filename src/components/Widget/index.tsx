@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Widget = styled.div`
+export const Widget = styled.div`
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
   border: 1px solid ${({ theme }) => theme.colors.primary};
@@ -24,7 +24,7 @@ const Widget = styled.div`
   }
 `;
 
-Widget.Header = styled.header`
+export const Header = styled.header`
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -36,7 +36,7 @@ Widget.Header = styled.header`
   }
 `;
 
-Widget.Content = styled.div`
+export const Content = styled.div`
   padding: 1.5rem 2rem;
 
   & > *:first-child {
@@ -52,5 +52,3 @@ Widget.Content = styled.div`
     padding: 0;
   }
 `;
-
-export default Widget;
