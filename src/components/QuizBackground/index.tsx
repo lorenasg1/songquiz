@@ -6,13 +6,16 @@ interface QuizBackgroundProps {
 
 const QuizBackground = styled.div<QuizBackgroundProps>`
   width: 100%;
-  background-size: cover;
-  background-position: center;
-  background-image: url(${({ backgroundImage }) => backgroundImage});
+  background-size: initial;
+  background-position: right;
+  background: url(${({ backgroundImage }) => backgroundImage}) no-repeat right
+    top;
   background-color: ${({ theme }) => theme.colors.mainBg};
   flex: 1;
+
   @media screen and (max-width: 500px) {
     background-image: none;
+
     &:after {
       content: '';
       background-size: cover;
@@ -31,6 +34,7 @@ const QuizBackground = styled.div<QuizBackgroundProps>`
       right: 0;
       z-index: 1;
     }
+
     *:first-child {
       position: relative;
       z-index: 10;

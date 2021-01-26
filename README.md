@@ -1,6 +1,6 @@
-# TypeScript & Styled Components Next.js example
+# Song Quiz
 
-This is a really simple project that show the usage of Next.js with TypeScript and Styled Components.
+Esse app foi desenvolvido durante a Imersão React da Alura.
 
 ## Deploy your own
 
@@ -20,9 +20,4 @@ yarn create next-app --example with-typescript-styled-components with-typescript
 
 Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
 
-## Notes
 
-This is an amalgamation of the 2 existing examples:
-
-- [with-typescript](https://github.com/vercel/next.js/tree/canary/examples/with-typescript)
-- [with-styled-components](https://github.com/vercel/next.js/tree/canary/examples/with-styled-components)

@@ -11,9 +11,7 @@ import QuizLogo from '../components/QuizLogo';
 import QuizBackground from '../components/QuizBackground';
 import Footer from '../components/Footer';
 import GitHubCorner from '../components/GitHubCorner';
-import { FormEvent, useState } from 'react';
-
-// import bgImg from '/mpb2.jpg';
+import { FormEvent } from 'react';
 
 export const QuizContainer = styled.div`
   width: 100%;
@@ -27,13 +25,8 @@ export const QuizContainer = styled.div`
   }
 `;
 
-export default function Home() {
+export default function QuizPage() {
   const router = useRouter();
-  const [name, setName] = useState('');
-
-  // function handleInputName(event: FormEvent) {
-  //   event => setName(event.target.value
-  // }
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -42,42 +35,30 @@ export default function Home() {
   }
 
   return (
-    <QuizBackground backgroundImage="/mpb.png">
+    <QuizBackground backgroundImage={db.bg}>
       <Head>
-        <title>Song Quiz</title>
+        <title>Song Quiz | Jogar </title>
       </Head>
       <QuizContainer>
         <QuizLogo />
         <Widget>
           <WidgetHeader>
-            <h1>{db.title}</h1>
+            <h1>Pergunta 1 de 5</h1>
           </WidgetHeader>
           <WidgetContent>
-            <p>{db.description}</p>
+            <p>Que música é essa?</p>
+            <p>
+              <em>Se você tiver que escolher entre você e o seu amor</em>
+            </p>
 
             <form onSubmit={handleSubmit}>
-              <input
-                type="text"
-                name=""
-                id=""
-                onChange={event => setName(event.target.value)}
-                placeholder="Diz aí seu nome pra jogar :)"
-              />
-
-              <Button type="submit" disabled={name.length === 0}>
-                Jogar {name}
+              <Button type="submit" disabled>
+                Confirmar
               </Button>
             </form>
           </WidgetContent>
         </Widget>
 
-        <Widget>
-          <WidgetContent>
-            <h1>Quizes da Galera</h1>
-
-            <p>lorem ipsum dolor sit amet...</p>
-          </WidgetContent>
-        </Widget>
         <Footer />
       </QuizContainer>
       <GitHubCorner projectUrl="https://github.com/lorenasg1/songquiz" />
