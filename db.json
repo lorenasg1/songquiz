@@ -1,14 +1,14 @@
 {
   "bg": "https://i2.wp.com/css-tricks.com/wp-content/uploads/2017/06/css-is-awesome-scaled.jpg?resize=1536%2C1208&ssl=1",
   "title": "Song Quiz",
-  "description": "Bora testar os conhecimentos em MPB, bora?",
+  "description": "Bora testar os conhecimentos em MPB?",
   "questions": [
     {
       "image": "https://media.giphy.com/media/xUOxf3yDKCuwpOlT3i/giphy.gif",
-      "title": "Como fazer um seletor por id via CSS?",
-      "description": "Essa é pra aquecer",
+      "title": "Qual é a continuação?",
+      "description": "Se você tiver que escolher entre você e...",
       "answer": 2,
-      "alternatives": [".elemento", "*elemento", "#elemento", "%elemento"]
+      "alternatives": ["eu", "seus pais", "o seu amor", "bozo"]
     },
     {
       "image": "https://media.giphy.com/media/13FrpeVH09Zrb2/giphy.gif",
@@ -25,7 +25,7 @@
   "theme": {
     "colors": {
       "primary": "#3a3a3a",
-      "secondary": "#29b6f6",
+      "secondary": "#ff9800",
       "mainBg": "#1C1814",
       "contrastText": "#FFFFFF",
       "wrong": "#FF5722",

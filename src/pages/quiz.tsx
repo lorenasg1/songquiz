@@ -1,65 +1,155 @@
-import styled from 'styled-components';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import db from '../../db.json';
 
-import { Widget, WidgetHeader, WidgetContent } from '../components/Widget';
+import {
+  Widget,
+  WidgetHeader,
+  WidgetContent,
+  WidgetTopic,
+} from '../components/Widget';
 
 import { Button } from '../components/Button';
 import QuizLogo from '../components/QuizLogo';
 import QuizBackground from '../components/QuizBackground';
-import Footer from '../components/Footer';
 import GitHubCorner from '../components/GitHubCorner';
-import { FormEvent } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
+import QuizContainer from '../components/QuizContainer';
 
-export const QuizContainer = styled.div`
-  width: 100%;
-  max-width: 350px;
-  padding-top: 45px;
-  margin: auto 10%;
+function LoadingWidget() {
+  return (
+    <Widget>
+      <WidgetHeader>Carregando...</WidgetHeader>
 
-  @media screen and (max-width: 500px) {
-    margin: auto;
-    padding: 15px;
-  }
-`;
+      <WidgetContent>[Desafio do Loading]</WidgetContent>
+    </Widget>
+  );
+}
 
-export default function QuizPage() {
+interface QuestionProps {
+  question: {
+    image: string;
+    title: string;
+    description: string;
+    alternatives: Array<string>;
+  };
+  currentQuestion: number;
+  totalQuestions: number;
+  onSubmit: Function;
+}
+
+function QuestionWidget({
+  question,
+  currentQuestion,
+  totalQuestions,
+  onSubmit,
+}: QuestionProps) {
+  const questionId = `question_${currentQuestion}`;
+
   const router = useRouter();
 
-  function handleSubmit(event: FormEvent) {
+  function handleSubmitButton(event: FormEvent) {
     event.preventDefault();
-
-    router.push(`/quiz?name=${name}`);
+    onSubmit();
   }
 
   return (
-    <QuizBackground backgroundImage={db.bg}>
+    <Widget>
+      <WidgetHeader>
+        <h1>
+          Pergunta {currentQuestion + 1} de {totalQuestions}
+        </h1>
+      </WidgetHeader>
+
+      <img
+        src={question.image}
+        alt="Descrição"
+        style={{
+          width: '100%',
+          height: '150px',
+          objectFit: 'cover',
+        }}
+      />
+
+      <WidgetContent>
+        <h2>{question.title}</h2>
+        <p>{question.description}</p>
+
+        <form onSubmit={handleSubmitButton}>
+          {question.alternatives.map((alternative, alternativeIndex) => {
+            const alternativeId = `alternative_${alternativeIndex}`;
+            return (
+              <WidgetTopic
+                as="label"
+                key={alternativeId}
+                htmlFor={alternativeId}
+              >
+                <input id={alternativeId} name={questionId} type="radio" />
+                {alternative}
+              </WidgetTopic>
+            );
+          })}
+
+          <br />
+          <Button type="submit">Confirmar</Button>
+        </form>
+      </WidgetContent>
+    </Widget>
+  );
+}
+
+const screenStates = {
+  QUIZ: 'QUIZ',
+  LOADING: 'LOADING',
+  RESULT: 'RESULT',
+};
+
+export default function QuizPage() {
+  const [screenState, setScreenState] = useState(screenStates.LOADING);
+
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const questionIndex = currentQuestion;
+  const question = db.questions[questionIndex];
+  const totalQuestions = db.questions.length;
+
+  useEffect(() => {
+    setTimeout(() => {
+      setScreenState(screenStates.QUIZ);
+    }, 1000);
+  }, []);
+
+  function handleSubmit() {
+    const nextQuestion = questionIndex + 1;
+
+    if (nextQuestion < totalQuestions) {
+      setCurrentQuestion(nextQuestion);
+    } else {
+      setScreenState(screenStates.RESULT);
+    }
+  }
+
+  return (
+    <QuizBackground backgroundImage="/mpb.png">
       <Head>
         <title>Song Quiz | Jogar </title>
       </Head>
       <QuizContainer>
         <QuizLogo />
-        <Widget>
-          <WidgetHeader>
-            <h1>Pergunta 1 de 5</h1>
-          </WidgetHeader>
-          <WidgetContent>
-            <p>Que música é essa?</p>
-            <p>
-              <em>Se você tiver que escolher entre você e o seu amor</em>
-            </p>
+        {screenState === screenStates.QUIZ && (
+          <QuestionWidget
+            question={question}
+            currentQuestion={currentQuestion}
+            totalQuestions={totalQuestions}
+            onSubmit={handleSubmit}
+          />
+        )}
 
-            <form onSubmit={handleSubmit}>
-              <Button type="submit" disabled>
-                Confirmar
-              </Button>
-            </form>
-          </WidgetContent>
-        </Widget>
+        {screenState === screenStates.LOADING && <LoadingWidget />}
 
-        <Footer />
+        {screenState === screenStates.RESULT && (
+          <div>Você acertou x questões, parabéns!</div>
+        )}
       </QuizContainer>
       <GitHubCorner projectUrl="https://github.com/lorenasg1/songquiz" />
     </QuizBackground>

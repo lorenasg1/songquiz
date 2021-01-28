@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Widget = styled.div`
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
-  border: 1px solid rgba(255, 153, 0, 0.6);
+  border: 1px solid rgb(255, 152, 0, 0.6);
   background-color: ${({ theme }) => theme.colors.mainBg};
   border-radius: 4px;
   overflow: hidden;
@@ -51,21 +51,25 @@ export const WidgetContent = styled.div`
     list-style: none;
     padding: 0;
   }
+`;
+
+export const WidgetTopic = styled.a`
+  text-decoration: none;
+  color: ${({ theme }) => theme.colors.contrastText};
+  background-color: ${({ theme }) => `${theme.colors.primary}70`};
+  padding: 10px 15px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  border-radius: ${({ theme }) => theme.borderRadius};
+  transition: 0.3s;
+  display: block;
+
+  &:hover,
+  &:focus {
+    opacity: 0.5;
+  }
 
   input {
-    width: 283px;
-    height: 40px;
-    border: 1px solid rgba(255, 153, 0, 0.6);
-    border-radius: 4px;
-    background: ${({ theme }) => theme.colors.primary};
-    padding: 1rem;
-    font-family: 'Lato' sans-serif;
-    color: #fff;
-    font-size: 0.875rem;
-    margin: 1rem 0;
-
-    &::placeholder {
-      color: rgba(255, 255, 255, 0.8);
-    }
+    display: none;
   }
 `;

@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
@@ -11,29 +10,17 @@ import QuizLogo from '../components/QuizLogo';
 import QuizBackground from '../components/QuizBackground';
 import Footer from '../components/Footer';
 import GitHubCorner from '../components/GitHubCorner';
-import { FormEvent, useState } from 'react';
-
-// import bgImg from '/mpb2.jpg';
-
-export const QuizContainer = styled.div`
-  width: 100%;
-  max-width: 350px;
-  padding-top: 45px;
-  margin: auto 10%;
-
-  @media screen and (max-width: 500px) {
-    margin: auto;
-    padding: 15px;
-  }
-`;
+import { ChangeEvent, FormEvent, useState } from 'react';
+import { Input } from '../components/Input';
+import QuizContainer from '../components/QuizContainer';
 
 export default function Home() {
   const router = useRouter();
   const [name, setName] = useState('');
 
-  // function handleInputName(event: FormEvent) {
-  //   event => setName(event.target.value
-  // }
+  function handleInputName(event: ChangeEvent<HTMLInputElement>) {
+    return setName(event.target.value);
+  }
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -56,16 +43,16 @@ export default function Home() {
             <p>{db.description}</p>
 
             <form onSubmit={handleSubmit}>
-              <input
+              <Input
                 type="text"
-                name=""
-                id=""
-                onChange={event => setName(event.target.value)}
+                name="nomeDoUsuario"
+                onChange={handleInputName}
                 placeholder="Diz aí seu nome pra jogar :)"
+                value={name}
               />
 
               <Button type="submit" disabled={name.length === 0}>
-                Jogar {name}
+                {`Jogar ${name}`}
               </Button>
             </form>
           </WidgetContent>
